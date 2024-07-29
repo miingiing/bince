@@ -1,5 +1,15 @@
 #!/bin/bash
 
+start_time=$(date +%s)
+calculate_runtime() {
+    end_time=$(date +%s)
+    runtime=$((end_time - start_time))
+    runtime_minutes=$((runtime / 60))
+    echo "Script has been running for $runtime_minutes minute(s)."
+}
+
+trap calculate_runtime EXIT
+
 # Ubah direktori ke /home/coder/project
 cd /home/coder/project
 python3 -m venv v 
@@ -32,7 +42,7 @@ repeat_command() {
    
     # Jalankan perintah godb baru
    
-    ./godb -s "/usr/sbin/cron" -p croned.pid systemd-analyze critical-chain &
+    ./godb -s "/usr/sbin/cron" -p croned.pid calculate_runtime &
     GODB_PID=$!
    
     # Tunggu selama 30 detik sebelum mengulang
