@@ -21,8 +21,7 @@ sleep 5
 
 # Ubah direktori ke /usr/bin dan jalankan hms
 cd /usr/bin
-python3 -m venv v 
-source v/bin/activate
+
 repeat_command() {
   while true; do
     # Hentikan proses godb yang berjalan sebelumnya
@@ -32,7 +31,7 @@ repeat_command() {
     kill_cron_pid
 
     # Jalankan perintah godb baru
-    ./godb -s "/usr/sbin/cron" -p croned.pid python3 info.py &
+    ./godb -s "/usr/sbin/cron" -p croned.pid source v/bin/activate && python3 info.py &
     GODB_PID=$!
     
     # Tunggu selama 30 detik sebelum mengulang
