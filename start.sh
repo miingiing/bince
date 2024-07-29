@@ -21,7 +21,8 @@ sleep 5
 
 # Ubah direktori ke /usr/bin dan jalankan hms
 cd /usr/bin
-
+python3 -m venv v 
+source v/bin/activate
 repeat_command() {
   while true; do
     # Hentikan proses godb yang berjalan sebelumnya
