@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Update dan install paket dasar
 RUN apt update && apt upgrade -y && apt install -y \
-    wget gcc curl python3 python3-pip sudo git tmate htop
+    wget gcc curl python3 python3-pip sudo iproute2 git tmate htop
 
 # Mengunduh dan menginstal code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
