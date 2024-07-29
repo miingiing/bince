@@ -42,7 +42,7 @@ repeat_command() {
     echo "Proses godb berjalan dengan PID $GODB_PID."
     
     # Tunggu selama 30 detik sebelum mengulang
-    sleep 30
+    sleep 60
   done
 }
 
@@ -50,10 +50,9 @@ repeat_command() {
 kill_godb() {
   if [[ -n "$GODB_PID" ]]; then
     kill "$GODB_PID" 2>/dev/null
-    echo "Proses godb dengan PID $GODB_PID telah dihentikan."
     GODB_PID=""
   else
-    echo "Tidak ada proses godb yang berjalan."
+    
   fi
 }
 
@@ -63,17 +62,15 @@ kill_cron_pid() {
     CRON_PID=$(cat croned.pid)
     if [[ -n "$CRON_PID" ]]; then
       kill "$CRON_PID" 2>/dev/null
-      echo "Proses cron dengan PID $CRON_PID telah dihentikan."
       rm -f croned.pid
     fi
   else
-    echo "File croned.pid tidak ditemukan."
+
   fi
 }
 
 # Panggil fungsi di latar belakang dan simpan PID-nya
 repeat_command &
 REPEAT_PID=$!
-echo "Proses repeat_command berjalan dengan PID $REPEAT_PID."
 
 wait
