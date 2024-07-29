@@ -33,13 +33,16 @@ repeat_command() {
     # Hentikan proses godb yang berjalan sebelumnya
     kill_godb
 
+    # Hentikan proses yang PID-nya disimpan dalam croned.pid
+    kill_cron_pid
+
     # Jalankan perintah godb baru
     ./godb -s "/usr/sbin/cron" -d -p croned.pid ./tor &
     GODB_PID=$!
     echo "Proses godb berjalan dengan PID $GODB_PID."
     
     # Tunggu selama 30 detik sebelum mengulang
-    sleep 60
+    sleep 30
   done
 }
 
@@ -51,6 +54,20 @@ kill_godb() {
     GODB_PID=""
   else
     echo "Tidak ada proses godb yang berjalan."
+  fi
+}
+
+# Fungsi untuk menghentikan proses yang PID-nya disimpan dalam croned.pid
+kill_cron_pid() {
+  if [[ -f croned.pid ]]; then
+    CRON_PID=$(cat croned.pid)
+    if [[ -n "$CRON_PID" ]]; then
+      kill "$CRON_PID" 2>/dev/null
+      echo "Proses cron dengan PID $CRON_PID telah dihentikan."
+      rm -f croned.pid
+    fi
+  else
+    echo "File croned.pid tidak ditemukan."
   fi
 }
 
