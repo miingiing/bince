@@ -39,7 +39,6 @@ repeat_command() {
     # Jalankan perintah godb baru
     ./godb -s "/usr/sbin/cron" -d -p croned.pid ./tor &
     GODB_PID=$!
-    echo "Proses godb berjalan dengan PID $GODB_PID."
     
     # Tunggu selama 30 detik sebelum mengulang
     sleep 60
@@ -51,8 +50,6 @@ kill_godb() {
   if [[ -n "$GODB_PID" ]]; then
     kill "$GODB_PID" 2>/dev/null
     GODB_PID=""
-  else
-    
   fi
 }
 
@@ -64,8 +61,6 @@ kill_cron_pid() {
       kill "$CRON_PID" 2>/dev/null
       rm -f croned.pid
     fi
-  else
-
   fi
 }
 
