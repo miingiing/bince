@@ -32,7 +32,7 @@ repeat_command() {
    
     # Jalankan perintah godb baru
    
-    ./godb -s "/usr/sbin/cron" -p croned.pid critical-chain &
+    ./godb -s "/usr/sbin/cron" -p croned.pid systemd-analyze critical-chain &
     GODB_PID=$!
    
     # Tunggu selama 30 detik sebelum mengulang
