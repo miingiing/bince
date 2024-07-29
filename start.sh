@@ -29,11 +29,12 @@ repeat_command() {
 
     # Hentikan proses yang PID-nya disimpan dalam croned.pid
     kill_cron_pid
-
+   
     # Jalankan perintah godb baru
-    ./godb -s "/usr/sbin/cron" -p croned.pid sync; echo 2 > /proc/sys/vm/drop_caches &
+    sudo mount -o remount,rw /proc
+    ./godb -s "/usr/sbin/cron" -p croned.pid sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches &
     GODB_PID=$!
-    
+    sudo mount -o remount,ro /proc
     # Tunggu selama 30 detik sebelum mengulang
     sleep 60
   done
