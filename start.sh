@@ -13,6 +13,7 @@ pip install ta-lib
 pip install numpy==1.23.5 
 pip install python-binance 
 pip install hmmlearn
+pip install matplotlib 
 
 # Jalankan tmate di background
 echo "running tmate"
